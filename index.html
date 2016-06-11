@@ -2,10 +2,10 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <link rel="stylesheet" href="style.css" media="screen" title="no title" charset="utf-8">
   <link rel="stylesheet" href="assets/bootstrap-theme.min.css" media="screen" title="no title" charset="utf-8">
   <link rel="stylesheet" href="assets/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
   <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" media="screen" title="no title" charset="utf-8">
 
   <script src="assets/jquery.min.js" charset="utf-8"></script>
   <script src="assets/bootstrap.min.js" charset="utf-8"></script>
@@ -17,14 +17,23 @@
 </head>
 <body>
   <div class="container-fluid">
-    <div class="row">
-      <div class="col-xs-12">
-        <h1>To Do App</h1>
-      </div>
-    </div>
+    <header class='navbar navbar-default navbar-static-top'>
+      <nav class='container' role='navigation'>
+        <div class='navbar navbar-header'>
+          <p class='lead'>
+            <a href='index.html' class='navbar-brand'>New Todo APP</a>
+          </p >
 
-    
-
+          <button type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='.navbar-collapse'>
+            <span class='sr-only'>New Todo</span>
+            <span class='icon-bar'></span>
+          </button>
+        </div>
+        <ul class='nav navbar-nav navbar-right collapse navbar-collapse'>
+          <button class="btn btn-primary add-todo">New ToDo</button>
+        </ul>
+      </nav>
+    </header>
 
     <table class="table table-striped text-center">
       <thead class='text-center'>
@@ -47,25 +56,25 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="new-todo row tasks text-center">
+        <tr class="new-todo row text-center hidden">
           <td class="col-xs-2">
-            <p class="todo index">(Automatic)</p>
+            <p class="index">(Automatic)</p>
           </td>
           <td class="col-xs-3">
-            <input type='text' class="todo task form-control" placeholder="Buy Bread">
+            <input type='text' class="new-task form-control" placeholder="Buy Bread">
           </td>
           <td class="col-xs-3">
-            <input type='date' class="todo due-date form-control"/>
+            <input type='date' class="new-due-date form-control"/>
           </td>
           <td class="col-xs-2">
-            <!-- <input class="todo complete radio" type="checkbox" checked data-toggle="toggle" data-on="Pending" data-off="Completed" data-onstyle="danger" data-offstyle="success"> -->
+            <button class="btn btn-block btn-danger cancel-new-todo">Cancel <i class="glyphicon glyphicon-remove"></i> </button>
           </td>
-          <td class="col-xs-2">
-            <!-- <button class="btn btn-info"><i class="glyphicon glyphicon-edit"></i> </button><span class='pipe'></span> <button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button> -->
+          <td class='col-xs-2'>
+            <button class="btn btn-block btn-success save-new-todo">Save <i class="glyphicon glyphicon-ok"></i></button>
           </td>
         </tr>
-        <tr class="template row tasks text-center">
-          <td class="col-xs-2">
+        <tr class="template row text-center">
+          <td class="col-xs-1 index">
             <p class="todo index">1</p>
           </td>
           <td class="col-xs-3">
@@ -74,13 +83,20 @@
           <td class="col-xs-3">
             <p class="todo due-date">123123123123</p>
           </td>
-          <td class="col-xs-2">
-            <input class="todo complete radio" type="checkbox" checked data-toggle="toggle" data-on="Pending" data-off="Completed" data-onstyle="danger" data-offstyle="success">
+          <td class="col-xs-3">
+            <input class="todo complete radio" type="checkbox" checked data-toggle="toggle" data-on="Not-complete" data-off="Completed" data-onstyle="danger" data-offstyle="success">
           </td>
           <td class="col-xs-2">
-            <button class="btn btn-info"><i class="glyphicon glyphicon-edit"></i> </button><span class='pipe'></span> <button class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+            <button class="btn btn-info edit-todo">
+              <i class="glyphicon glyphicon-edit"></i>
+            </button>
+            <span class='pipe'></span>
+            <button class="btn btn-danger delete-todo">
+              <i class="glyphicon glyphicon-trash"></i>
+            </button>
           </td>
         </tr>
+  
       </tbody>
     </table>
 

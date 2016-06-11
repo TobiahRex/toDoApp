@@ -1,12 +1,12 @@
 .template {
-  /*display : none;*/
+  display : none;
 }
 
-.new-todo {
-  /*display : none;*/
+.hidden {
+  display: none;
 }
 
-tr.new-todo p.todo.index {
+tr.new-todo {
   font-style: italic;
   color: #7a7c7c;
 }
