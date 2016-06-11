@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Local Storage</title>
+  <link rel="stylesheet" href="assets/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="assets/bootstrap-theme.min.css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="style.css" media="screen" title="no title" charset="utf-8">
+
+  <script src="assets/jquery.min.js" charset="utf-8"></script>
+  <script src="assets/bootstrap.min.js" charset="utf-8"></script>
+  <script src="main.js" charset="utf-8"></script>
+</head>
+<body>
+  <h1>
+    Local Storage
+  </h1>
+  <hr>
+  <div class="container-fluid">
+    <div class="buttons">
+      <div class="row">
+        <div class="col-sm-3">
+          <button class="btn btn-danger">Delete LocalStorage</button>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="row">
+        <div class="col-sm-3">
+          <button class="ls-num-btn btn btn-primary">Get 'ls.Num'</button>
+        </div>
+        <div class="col-sm-5">
+          <input class='new-name' type="text" name='name' value="">
+          <button type="button" class='submit-names btn btn-success' name="name">Add Name</button>
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="container row">
+      <div class="col-sm-3">
+        <hr>
+        <h3>ls.Num: </h3>
+        <blockquote class="num lead">
+        </blockquote>
+      </div>
+
+      <div class="col-sm-3">
+        <hr>
+        <h3>ls.Names: </h3>
+        <blockquote class="names lead">
+          <ul class="name-list"></ul>
+        </blockquote>
+      </div>
+
+    </div>
+
+    <hr>
+
+  </div>
+</body>
+</html>
