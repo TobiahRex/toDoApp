@@ -35,7 +35,8 @@ function saveTodo(){
   Todos.push(newTaskObj);
   postTodo(Todos);
   renderTodos(Todos);
-}
+}; 
+
 function getTodos(){
   var stringOfTodos = localStorage.todos;
   try {
@@ -53,7 +54,6 @@ function postTodo(todos){
 
 function renderTodos(todos){
   console.log('rendering: ', todos);
-
   var $todos = todos.map(todo => {
     console.log('todo index: ', todo.index);
     let $tr = $('.template').clone();
@@ -71,7 +71,6 @@ function renderTodos(todos){
 };
 
 function deleteTodo(){
-
   console.log('deleteTodo');
   var dbTodos = getTodos();
   let index = $(this).parent().parent().index();  // +2 for Dom Index. -2 for localStorage index.
