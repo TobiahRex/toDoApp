@@ -8,7 +8,7 @@ function init(){
   var dbTodos = getTodos();
   renderTodos(dbTodos);
   $('.add-todo').on('click', newTodo);
-  // $('tbody').on('click', '.delete-todo',deleteTodo);
+  $('tbody').on('click', '.delete-todo',deleteTodo);
 };
 function getTodos(){
   var todosStr = localStorage.todos;
@@ -71,15 +71,12 @@ function renderTodos(todos){
   $('tbody').append(newTodoClone).append(templateClone).append($todos);
 };
 
-// function deleteTodo(){
-//   console.log('deleteTodo');
-//   var dbTodos = getTodos();
-//   let index = $(this).parent().parent().index();  // +2 for Dom Index. -2 for localStorage index.
-//   index -= 2;
-//   console.log('index: ', index);
-//   dbTodos.splice(index, 1);
-//
-//   writeTodo(dbTodos);
-//   renderTodos(dbTodos);
-//   return;
-// };
+function deleteTodo(){
+  var dbTodos = getTodos();
+  let $index = $(this).parent().parent().index();  // +2 for Dom Index. -2 for localStorage index.
+  let index = 0;
+  $index ===  2 ? index = 0 : index = $index - 2;
+  dbTodos.splice(index, 1);
+  writeTodo(dbTodos);
+  renderTodos(dbTodos);
+};
