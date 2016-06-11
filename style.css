@@ -1,0 +1,20 @@
+.template {
+  /*display : none;*/
+}
+
+.new-todo {
+  /*display : none;*/
+}
+
+tr.new-todo p.todo.index {
+  font-style: italic;
+  color: #7a7c7c;
+}
+
+tr.row.tasks {
+  font-size: 18px;
+}
+
+.pipe {
+  font-size: 24px;
+}
