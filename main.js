@@ -1,42 +1,16 @@
 'use strict';
 
 // TODO
-// - create editTodo()
-// - create saveEdit()
-// - create isComplete()
-// - create deleteTodo()
-
 
 $(document).ready(init);
 
 function init(){
   var dbTodos = getTodos();
-  console.log('dbTodos: ', dbTodos);
   renderTodos(dbTodos);
-
   $('.add-todo').on('click', newTodo);
-  $('tbody').on('click', '.delete-todo',deleteTodo);
   $('.save-new-todo').on('click', saveTodo);
+  // $('tbody').on('click', '.delete-todo',deleteTodo);
 };
-
-function newTodo(){
-  $('.new-todo').removeClass('hidden'); // shows the new-todo row
-};
-
-function saveTodo(){
-  let dbTodos = getTodos();
-  let newTaskObj = {
-    index     : dbTodos.length + 1,
-    task      : $('input.new-task.form-control').val(),
-    dueDate      : $('input.new-due-date.form-control').val(),
-    complete  : false
-  };
-  console.log(newTaskObj);
-  dbTodos.push(newTaskObj);
-  postTodo(dbTodos);
-  renderTodos(dbTodos);
-};
-
 function getTodos(){
   var todosStr = localStorage.todos;
   var dbTodos;
@@ -47,29 +21,43 @@ function getTodos(){
   };
   return dbTodos; // array
 };
-
-function postTodo(todos){
+function writeTodo(todos){
   let newTodos = JSON.stringify(todos);
   localStorage.todos = newTodos;
 };
+function newTodo(){
+  $('.new-todo').removeClass('hidden'); // shows the new-todo row
+};
 
+function saveTodo(){
+console.log('save todo');
+  let dbTodos = getTodos();
+  let newTaskObj = {
+    index     : dbTodos.length + 1,
+    task      : $('input.new-task').val(),
+    dueDate   : $('input.new-due-date').val(),
+    complete  : false
+  };
+  $('input.new-task').val('');
+  $('input.new-due-date').val(''),
+  $('.new-todo').addClass('hidden');
+  dbTodos.push(newTaskObj);
+  writeTodo(dbTodos);
+  renderTodos(dbTodos);
+};
 function renderTodos(todos){
-  console.log('rendering: ', todos);
   var $todos = todos.map(todo => {
-    console.log('todo index: ', todo.index);
     let $tr = $('.template').clone();
     $tr.removeClass('template');
     $tr.addClass('task');
     $tr.find('.index').text(todo.index);
     $tr.find('.task').text(todo.task);
     $tr.find('.due-date').text(todo.dueDate);
-    $tr.find('.complete.radio').prop('checked', true);
     return $tr;
   });
-
   let newTodoClone = $('tr.new-todo').clone();
   let templateClone = $('tr.template').clone();
-  $('tbody').empty().append(newTodoClone).append(templateClone).append($todos);
+  // $('tbody').empty().append(newTodoClone).append(templateClone).append($todos);
 };
 
 // function deleteTodo(){
@@ -80,7 +68,7 @@ function renderTodos(todos){
 //   console.log('index: ', index);
 //   dbTodos.splice(index, 1);
 //
-//   postTodo(dbTodos);
+//   writeTodo(dbTodos);
 //   renderTodos(dbTodos);
 //   return;
 // };
