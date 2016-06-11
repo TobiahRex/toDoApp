@@ -24,27 +24,28 @@ function newTodo(){
 };
 
 function saveTodo(){
-  let Todos = getTodos();
+  let dbTodos = getTodos();
   let newTaskObj = {
-    index     : Todos.length + 1,
+    index     : dbTodos.length + 1,
     task      : $('input.new-task.form-control').val(),
     dueDate      : $('input.new-due-date.form-control').val(),
     complete  : false
   };
   console.log(newTaskObj);
-  Todos.push(newTaskObj);
-  postTodo(Todos);
-  renderTodos(Todos);
-}; 
+  dbTodos.push(newTaskObj);
+  postTodo(dbTodos);
+  renderTodos(dbTodos);
+};
 
 function getTodos(){
-  var stringOfTodos = localStorage.todos;
+  var todosStr = localStorage.todos;
+  var dbTodos;
   try {
-    var dbTodos = JSON.parse(stringOfTodos);
+    dbTodos = JSON.parse(todosStr);
   } catch(err) {
-    var dbTodos = [];
+    dbTodos = [];
   };
-  return dbTodos; // returns array;
+  return dbTodos; // array
 };
 
 function postTodo(todos){
@@ -66,19 +67,20 @@ function renderTodos(todos){
     return $tr;
   });
 
-  $('tbody').empty();
-  $('tbody').append($todos);
+  let newTodoClone = $('tr.new-todo').clone();
+  let templateClone = $('tr.template').clone();
+  $('tbody').empty().append(newTodoClone).append(templateClone).append($todos);
 };
 
-function deleteTodo(){
-  console.log('deleteTodo');
-  var dbTodos = getTodos();
-  let index = $(this).parent().parent().index();  // +2 for Dom Index. -2 for localStorage index.
-  index -= 2;
-  console.log('index: ', index);
-  dbTodos.splice(index, 1);
-
-  postTodo(dbTodos);
-  renderTodos(dbTodos);
-  return;
-};
+// function deleteTodo(){
+//   console.log('deleteTodo');
+//   var dbTodos = getTodos();
+//   let index = $(this).parent().parent().index();  // +2 for Dom Index. -2 for localStorage index.
+//   index -= 2;
+//   console.log('index: ', index);
+//   dbTodos.splice(index, 1);
+//
+//   postTodo(dbTodos);
+//   renderTodos(dbTodos);
+//   return;
+// };
