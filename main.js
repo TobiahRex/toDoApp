@@ -8,7 +8,6 @@ function init(){
   var dbTodos = getTodos();
   renderTodos(dbTodos);
   $('.add-todo').on('click', newTodo);
-  $('.save-new-todo').on('click', saveTodo);
   // $('tbody').on('click', '.delete-todo',deleteTodo);
 };
 function getTodos(){
@@ -27,6 +26,9 @@ function writeTodo(todos){
 };
 function newTodo(){
   $('.new-todo').removeClass('hidden'); // shows the new-todo row
+  $('.save-new-todo').on('click', saveTodo);
+  $('.cancel-new-todo').on('click', cancelTodo);
+
 };
 
 function saveTodo(){
@@ -45,19 +47,28 @@ console.log('save todo');
   writeTodo(dbTodos);
   renderTodos(dbTodos);
 };
+function cancelTodo(){
+  console.log('cancel');
+  $('input.new-task').val('');
+  $('input.new-due-date').val(''),
+  $('.new-todo').addClass('hidden');
+};
+
 function renderTodos(todos){
-  var $todos = todos.map(todo => {
+    let $todos = [];
+    todos.map(todo => {
     let $tr = $('.template').clone();
     $tr.removeClass('template');
     $tr.addClass('task');
     $tr.find('.index').text(todo.index);
     $tr.find('.task').text(todo.task);
     $tr.find('.due-date').text(todo.dueDate);
-    return $tr;
+    return $todos.push($tr);
   });
   let newTodoClone = $('tr.new-todo').clone();
   let templateClone = $('tr.template').clone();
-  // $('tbody').empty().append(newTodoClone).append(templateClone).append($todos);
+  $('tbody').empty();
+  $('tbody').append(newTodoClone).append(templateClone).append($todos);
 };
 
 // function deleteTodo(){
