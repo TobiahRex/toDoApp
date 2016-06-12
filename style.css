@@ -1,8 +1,9 @@
-.template {
+tr.template {
   display : none;
 }
 
-.hidden {
+
+tr.hidden {
   display: none;
 }
 
@@ -11,10 +12,10 @@ tr.new-todo {
   color: #7a7c7c;
 }
 
-tr.row.tasks {
-  font-size: 18px;
+.pipe {
+  font-size: 24px;
 }
 
-.pipe {
+tr.todo {
   font-size: 24px;
 }
