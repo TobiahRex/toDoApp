@@ -6,6 +6,11 @@
   display: none;
 }
 
+/*div.toggle-group {
+  width: 109.5px;
+  height: 35px;
+}*/
+
 tr.new-todo {
   font-style: italic;
   color: #7a7c7c;
