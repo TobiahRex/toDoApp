@@ -9,7 +9,7 @@ function init(){
   renderTodos(dbTodos);
   $('.add-todo').on('click', newTodo);
   $('tbody').on('click', '.delete-todo',deleteTodo);
-  $('tbody').on('click', '.toggle-group', isCompleted);
+  $('tbody').on('click', 'tr.task', isCompleted);
 };
 function getTodos(){
   var todosStr = localStorage.todos;
@@ -27,11 +27,10 @@ function writeTodo(todos){
 };
 function newTodo(){
   $('.new-todo').removeClass('hidden'); // shows the new-todo row
-  $('.save-new-todo').on('click', saveTodo);
+  $('.save-new-todo').on('click', saveNewTodo);
   $('.cancel-new-todo').on('click', cancelTodo);
-
 };
-function saveTodo(){
+function saveNewTodo(){
   let dbTodos = getTodos();
   let newTaskObj = {
     index     : dbTodos.length + 1,
@@ -61,8 +60,9 @@ function renderTodos(todos){
     $tr.find('.index').text(todo.index);
     $tr.find('.task').text(todo.task);
     $tr.find('.due-date').text(todo.dueDate);
-    debugger;
-    !todo.completed ? $tr.find('input.is-complete').bootstrapToggle('on') : $tr.find('input.is-complete').bootstrapToggle('off') ;
+    $tr.find('input').data('completed', todo.completed);
+
+    // the above line determines whether to render the todo as complete or incomplete, and then saves that data in element.
     return $todos.push($tr);
   });
   let newTodoClone = $('tr.new-todo').clone();
@@ -81,18 +81,18 @@ function deleteTodo(){
 };
 
 function isCompleted(){
-  console.log('completed');
   let dbTodos = getTodos();
-  let $index = $(this).parent().parent().parent().index();
+  let $index = $(this).index();
   let index = $index-2;
+  let $state = $(this).find('input').data('completed');
+  let newState = !$state;                                                           // toggle $state.
+  let on_off = '';
 
-  let $state =  $(this).parent().parent().find('input').prop('checked');  // false for new completion.
-  if(!$state === false) return;                                           // if It's already been completed exit function.
-  $(this).parent().parent().find('input').prop('checked', true);          // if not, then change it to completed.
-  dbTodos[index].completed = true;                                        // change completed status in LocalStorage.
-  writeTodo(dbTodos);                                                     // saving to local stoarge.
-  $(this).parent().parent().find('input').bootstrapToggle('off');         // update the current render in the table.  (off === completed. on === incomplete.)
+  newState ? on_off = 'on' : on_off = 'off';
 
-  // $(this).bootstrapToggle('toggle');
+  $(this).find('input').bootstrapToggle(on_off);
+  dbTodos[index].completed = newState;                                          // change completed status in LocalStorage.
+  writeTodo(dbTodos);                                                         // saving to local stoarge.
+
 
 };
