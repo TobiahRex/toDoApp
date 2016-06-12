@@ -1,10 +1,14 @@
-tr.template {
+tr.template,
+tr.hidden,
+input.edit-task.hidden,
+input.edit-date.hidden,
+div.toggle-template.hidden,
+button.cancel-edit.hidden,
+button.save-edit.hidden,
+button.edit-todo.hidden,
+button.delete-todo.hidden,
+.hidden {
   display : none;
-}
-
-
-tr.hidden {
-  display: none;
 }
 
 tr.new-todo {
@@ -18,8 +22,4 @@ tr.new-todo {
 
 tr.todo {
   font-size: 24px;
-}
-
-input.toggle-template.hidden {
-  /*display: none;*/
 }

@@ -10,7 +10,7 @@
   <script src="assets/jquery.min.js" charset="utf-8"></script>
   <script src="assets/bootstrap.min.js" charset="utf-8"></script>
   <script src="main.js" charset="utf-8"></script>
-  <script src="assets/bootstrap-toggle.min.js" charset="utf-8"></script>
+  <script src="assets/bootstrap-toggle.js" charset="utf-8"></script>
   <title>
     ToDo App
   </title>
@@ -71,6 +71,7 @@
           </td>
           <td class='col-xs-2'>
             <button class="save-new-todo btn btn-block btn-success">Save <i class="glyphicon glyphicon-ok"></i></button>
+
           </td>
         </tr>
         <tr class="template row text-center">
@@ -78,22 +79,34 @@
             <p class="index">1</p>
           </td>
           <td class="col-xs-3">
+            <input type="text" class="edit-task hidden form-control">
             <p class="task">Buy bread</p>
           </td>
           <td class="col-xs-3">
-            <p class="due-date">123123123123</p>
+            <input type="date" class="edit-date hidden form-control">
+            <p class="due-date"></p>
           </td>
           <td class="col-xs-3 is-complete">
-            <input type="checkbox" checked data-toggle="toggle" data-on="Done" data-off="Todo" data-onstyle="success" data-offstyle="danger">
+            <input id='todo-toggle' type="checkbox" checked data-toggle="toggle" data-on="Done" data-off="Todo" data-onstyle="success" data-offstyle="danger">
           </td>
-          <td class="col-xs-2">
+          <td class="col-xs-2 edit-delete-col">
             <button class="btn btn-info edit-todo">
               <i class="glyphicon glyphicon-edit"></i>
             </button>
+
             <span class='pipe'></span>
+
             <button class="btn btn-danger delete-todo">
               <i class="glyphicon glyphicon-trash"></i>
             </button>
+          </td>
+          <!-- Hidden Columns -->
+
+          <td class="col-xs-2 cancel-edit-col hidden">
+            <button class="cancel-edit btn btn-block btn-danger">Cancel <i class="glyphicon glyphicon-remove"></i> </button>
+          </td>
+          <td class="col-xs-2 save-edit-col hidden">
+            <button class="save-edit btn btn-block btn-info">Save <i class="glyphicon glyphicon-ok"></i></button>
           </td>
         </tr>
 
@@ -101,23 +114,26 @@
     </table>
   </div>
 
-  <div class="toggle btn btn-danger off" data-toggle="toggle" style="width: 73.5px; height: 35px;">
-    <input type="checkbox" checked="" data-toggle="toggle" data-on="Done" data-off="Todo" data-onstyle="success" data-offstyle="danger">
-    <div class="toggle-group">
-      <label class="btn btn-success toggle-on">Done</label>
-      <label class="btn btn-danger active toggle-off">Todo</label>
-      <span class="toggle-handle btn btn-default"></span>
+  <div class="toggle-template hidden">
+    <div class="toggle btn btn-danger off" data-toggle="toggle" style="width: 73.5px; height: 35px;">
+      <input type="checkbox" checked="" data-toggle="toggle" data-on="Done" data-off="Todo" data-onstyle="success" data-offstyle="danger">
+      <div class="toggle-group">
+        <label class="btn btn-success toggle-on">Done</label>
+        <label class="btn btn-danger active toggle-off">Todo</label>
+        <span class="toggle-handle btn btn-default"></span>
+      </div>
+    </div>
+
+    <div class="toggle btn btn-success" data-toggle="toggle" style="width: 73.5px; height: 35px;">
+      <input type="checkbox" checked="" data-toggle="toggle" data-on="Done" data-off="Todo" data-onstyle="success" data-offstyle="danger">
+      <div class="toggle-group">
+        <label class="btn btn-success toggle-on">Done</label>
+        <label class="btn btn-danger active toggle-off">Todo</label>
+        <span class="toggle-handle btn btn-default"></span>
+      </div>
     </div>
   </div>
 
-  <div class="toggle btn btn-success" data-toggle="toggle" style="width: 73.5px; height: 35px;">
-    <input type="checkbox" checked="" data-toggle="toggle" data-on="Done" data-off="Todo" data-onstyle="success" data-offstyle="danger">
-    <div class="toggle-group">
-      <label class="btn btn-success toggle-on">Done</label>
-      <label class="btn btn-danger active toggle-off">Todo</label>
-      <span class="toggle-handle btn btn-default"></span>
-    </div>
-  </div>
 
 </body>
 </html>

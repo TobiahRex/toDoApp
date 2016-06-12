@@ -8,6 +8,7 @@ function init(){
   $('.add-todo').on('click', newTodo);
   $('tbody').on('click', '.delete-todo', deleteTodo);
   $('tbody').on('click', 'div.toggle-group', isCompleted);
+  $('tbody').on('click', '.edit-todo', editTodo);
 };
 function newTodo(){
   $('.new-todo').removeClass('hidden'); // shows the new-todo row
@@ -57,7 +58,6 @@ function renderTodos(todos){
   $('tbody').append(newTodoClone).append(templateClone).append($todos);
 
 };
-
 function isCompleted(){
   let dbTodos = getTodos();
   let $index = $(this).parent().parent().parent().index();
@@ -72,6 +72,70 @@ function isCompleted(){
   // $(`tr.todo:eq(${index})`).find('div.btn-success').bootstrapToggle(on_off);
   let newBtn = $(this);
 };
+function editTodo(){
+  let dbTodos = getTodos();
+  let $index = $(this).parent().parent().index();
+  let $row = $(this).parent().parent();
+  let index = $index-2;
+  let task4edit = dbTodos[index].task;
+  let date4edit = dbTodos[index].dueDate;
+  $row.find('input.edit-task').removeClass('hidden');
+  $row.find('input.edit-date').removeClass('hidden');
+  $row.find('.cancel-edit-col').removeClass('hidden');
+  $row.find('.save-edit-col').removeClass('hidden');
+
+  $row.find('p.task').addClass('hidden');
+  $row.find('p.due-date').addClass('hidden');
+  $row.find('button.edit-todo').addClass('hidden');
+  $row.find('button.delete-todo').addClass('hidden');
+  //
+  $row.find('.is-complete').addClass('hidden');
+  $row.find('.edit-delete-col').addClass('hidden');
+  //
+  $row.find('input.edit-task').val(task4edit);
+  $row.find('input.edit-date').val(date4edit);
+
+  $('.save-edit').on('click', saveEdit);
+  $('.cancel-edit').on('click', cancelEdit);
+};
+
+function saveEdit(){
+  let $row = $(this).parent().parent();
+  let dbTodos = getTodos();
+  let $index = $(this).parent().parent().index();
+  let index = $index-2;
+  dbTodos[index].task = $(`tr.todo:eq(${index})`).find('input.edit-task').val();
+  dbTodos[index].dueDate = $(`tr.todo:eq(${index})`).find('input.edit-date').val();
+  $row.find('input.edit-task').addClass('hidden');
+  $row.find('input.edit-date').addClass('hidden');
+  $row.find('.cancel-edit-col').addClass('hidden');
+  $row.find('.save-edit-col').addClass('hidden');
+
+  $row.find('p.task').removeClass('hidden');
+  $row.find('p.due-date').removeClass('hidden');
+  $row.find('button.edit-todo').removeClass('hidden');
+  $row.find('button.delete-todo').removeClass('hidden');
+  $row.find('.is-complete').removeClass('hidden');
+  $row.find('.edit-delete-col').removeClass('hidden');
+  writeTodo(dbTodos);
+  renderTodos(dbTodos);
+};
+
+function cancelEdit(){
+  let $row = $(this).parent().parent();
+  $row.find('input.edit-task').addClass('hidden');
+  $row.find('input.edit-date').addClass('hidden');
+  $row.find('.cancel-edit-col').addClass('hidden');
+  $row.find('.save-edit-col').addClass('hidden');
+
+  $row.find('p.task').removeClass('hidden');
+  $row.find('p.due-date').removeClass('hidden');
+  $row.find('button.edit-todo').removeClass('hidden');
+  $row.find('button.delete-todo').removeClass('hidden');
+  $row.find('.is-complete').removeClass('hidden');
+  $row.find('.edit-delete-col').removeClass('hidden');
+};
+
 function deleteTodo(){
   var dbTodos = getTodos();
   let $index = $(this).parent().parent().index();  // +2 for Dom Index. -2 for localStorage index.
