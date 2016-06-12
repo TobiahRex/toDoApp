@@ -46,7 +46,9 @@ function renderTodos(todos){
     $tr.find('.due-date').text(todo.dueDate);
     $tr.find('input').data('completed', todo.completed);
     return $tr;
-    let newTodoClo ty();
+    let newTodoClone = $('tr.new-todo').clone();
+    let templateClone = $('tr.template').clone();
+    $('tbody').empty();
   });
   $('tbody').append(newTodoClone).append(templateClone).append($todos);
 };
