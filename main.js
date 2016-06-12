@@ -7,7 +7,7 @@ function init(){
   renderTodos(dbTodos);
   $('.add-todo').on('click', newTodo);
   $('tbody').on('click', '.delete-todo', deleteTodo);
-  $('tbody').on('click', '.is-complete', isCompleted);
+  $('tbody').on('click', 'div.toggle-group', isCompleted);
 };
 function newTodo(){
   $('.new-todo').removeClass('hidden'); // shows the new-todo row
@@ -37,36 +37,40 @@ function cancelTodo(){
   $('.new-todo').addClass('hidden');
 };
 function renderTodos(todos){
+
   let $todos = todos.map(todo => {
-    let $tr = $('.template').clone();
+    let $tr = $('tr.template').clone();
     $tr.removeClass('template');
     $tr.addClass('todo');
     $tr.find('.index').text(todo.index);
     $tr.find('.task').text(todo.task);
     $tr.find('.due-date').text(todo.dueDate);
-    $tr.find('input').data('completed', todo.completed);
+    // let state = todo.completed;
+    // let on_off = '';
+    // state ? on_off = 'off' : on_off = 'on';
+    // $tr.find('input').bootstrapToggle(on_off);
     return $tr;
-    let newTodoClone = $('tr.new-todo').clone();
-    let templateClone = $('tr.template').clone();
-    $('tbody').empty();
   });
+  let newTodoClone = $('tr.new-todo').clone();
+  let templateClone = $('tr.template').clone();
+  $('tbody').empty();
   $('tbody').append(newTodoClone).append(templateClone).append($todos);
+
 };
 
 function isCompleted(){
   let dbTodos = getTodos();
-  let $index = $(this).parent().index();
+  let $index = $(this).parent().parent().parent().index();
   let index = $index-2;
-  let $state = $('tr.todo').find('input').data('completed');
+  let $state = dbTodos[index].completed;
   let newState = !$state;
   let on_off = '';
-
   newState ? on_off = 'off' : on_off = 'on';
 
-  $(this).find('input').bootstrapToggle(on_off);
   dbTodos[index].completed = newState;
   writeTodo(dbTodos);
-  renderTodos(dbTodos);
+  $(`tr.todo:eq(${index})`).find('input').bootstrapToggle(on_off);
+  // renderTodos(dbTodos);
 };
 function deleteTodo(){
   var dbTodos = getTodos();
