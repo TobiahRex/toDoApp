@@ -1,6 +1,6 @@
 # Todo App
 
-### STATUS : *C.R.U.D. SAT. 12 Jun 2016*
+### STATUS : *C.R.U.D.* SAT on 12 Jun 2016
 
 * JS, jQuery & Bootstrap.
 
@@ -13,4 +13,3 @@
   - Issue 2: When it's instantiated it does not load the Bootstrap Toggle Script. On refresh, the script runs, and then it works.
   - Needed Fix: How to run the script, once it's been generated.
   - Possible Work Around : Emulating the script logic in my own main.js.
-  
