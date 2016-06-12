@@ -45,10 +45,10 @@ function renderTodos(todos){
     $tr.find('.index').text(todo.index);
     $tr.find('.task').text(todo.task);
     $tr.find('.due-date').text(todo.dueDate);
-    // let state = todo.completed;
-    // let on_off = '';
-    // state ? on_off = 'off' : on_off = 'on';
-    // $tr.find('input').bootstrapToggle(on_off);
+    let state = todo.completed;
+    let on_off = '';
+    state ? on_off = 'on' : on_off = 'off';
+    $tr.find('input').bootstrapToggle(on_off);
     return $tr;
   });
   let newTodoClone = $('tr.new-todo').clone();
@@ -70,7 +70,7 @@ function isCompleted(){
   dbTodos[index].completed = newState;
   writeTodo(dbTodos);
   $(`tr.todo:eq(${index})`).find('input').bootstrapToggle(on_off);
-  // renderTodos(dbTodos);
+
 };
 function deleteTodo(){
   var dbTodos = getTodos();
