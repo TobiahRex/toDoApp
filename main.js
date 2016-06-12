@@ -37,7 +37,6 @@ function cancelTodo(){
   $('.new-todo').addClass('hidden');
 };
 function renderTodos(todos){
-
   let $todos = todos.map(todo => {
     let $tr = $('tr.template').clone();
     $tr.removeClass('template');
@@ -48,7 +47,8 @@ function renderTodos(todos){
     let state = todo.completed;
     let on_off = '';
     state ? on_off = 'on' : on_off = 'off';
-    $tr.find('input').bootstrapToggle(on_off);
+
+    // $tr.find('input').bootstrapToggle(on_off);
     return $tr;
   });
   let newTodoClone = $('tr.new-todo').clone();
@@ -69,8 +69,8 @@ function isCompleted(){
 
   dbTodos[index].completed = newState;
   writeTodo(dbTodos);
-  $(`tr.todo:eq(${index})`).find('input').bootstrapToggle(on_off);
-
+  // $(`tr.todo:eq(${index})`).find('div.btn-success').bootstrapToggle(on_off);
+  let newBtn = $(this);
 };
 function deleteTodo(){
   var dbTodos = getTodos();
@@ -94,4 +94,13 @@ function getTodos(){
 function writeTodo(todos){
   let newTodos = JSON.stringify(todos);
   localStorage.todos = newTodos;
+};
+
+function fixToggle(newBtn){
+  console.log(newBtn);
+  // let newBtnClone = newBtn.parent().clone();
+  // newBtn.parent().parent().addClass('new-toggle');
+  // newBtn.parent().parent().empty();
+  // $('tr.todo').find('td.new-toggle').append(newBtnClone);
+  //
 };
